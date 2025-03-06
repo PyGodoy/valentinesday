@@ -219,102 +219,107 @@
 
     <script>
         // URLs de imagens de flores (flores em formato PNG com fundo transparente)
-        const flowerImages = [
-            "petala.png", // Rosa cor-de-rosa
-            "petala.png", // Pétala de rosa
-            "petala.png", // Flor de cerejeira
-            "petala.png", // Flor de sakura
-            "petala.png"  // Flor de lotus
-        ];
+const flowerImages = [
+    "petala.png", // Rosa cor-de-rosa
+    "petala.png", // Pétala de rosa
+    "petala.png", // Flor de cerejeira
+    "petala.png", // Flor de sakura
+    "petala.png"  // Flor de lotus
+];
 
-        // Timer que conta desde 7 de setembro de 2024
-        const startDate = new Date('2024-09-07T00:00:00');
-        
-        function updateTimer() {
-            const now = new Date();
-            const diff = now - startDate;
-            
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-            
-            document.getElementById('timer').innerHTML = 
-                `${days} dias, ${hours} horas, ${minutes} minutos e ${seconds} segundos`;
-        }
-        
-        setInterval(updateTimer, 1000);
-        updateTimer();
+// Timer que conta desde 7 de setembro de 2024
+const startDate = new Date('2024-09-07T00:00:00');
 
-        // Carrossel de imagens
-        let currentSlide = 0;
-        const slides = document.querySelector('.slides');
-        const slideCount = document.querySelectorAll('.slide').length;
-        
-        function showSlide(n) {
-            currentSlide = (n + slideCount) % slideCount;
-            slides.style.transform = `translateX(-${currentSlide * 100}%)`;
-        }
-        
-        document.querySelector('.next').addEventListener('click', () => {
-            showSlide(currentSlide + 1);
-        });
-        
-        document.querySelector('.prev').addEventListener('click', () => {
-            showSlide(currentSlide - 1);
-        });
+function updateTimer() {
+    const now = new Date();
+    const diff = now - startDate;
+    
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+    
+    document.getElementById('timer').innerHTML = 
+        `${days} dias, ${hours} horas, ${minutes} minutos e ${seconds} segundos`;
+}
 
-        // Alternar slides automaticamente a cada 5 segundos
-        setInterval(() => {
-            showSlide(currentSlide + 1);
-        }, 5000);
+setInterval(updateTimer, 1000);
+updateTimer();
 
-        // Função melhorada para criar pétalas de flores caindo
-        function createPetal() {
-            const container = document.getElementById('falling-flowers');
-            const petal = document.createElement('img');
-            petal.classList.add('petal');
-            
-            // Escolher aleatoriamente entre as imagens de flores
-            const randomImage = flowerImages[Math.floor(Math.random() * flowerImages.length)];
-            petal.src = randomImage;
-            
-            // Posição aleatória no eixo X
-            const startPositionX = Math.random() * 100;
-            petal.style.left = startPositionX + 'vw';
-            
-            // Tamanho aleatório
-            const size = Math.random() * 25 + 15;
-            petal.style.width = size + 'px';
-            petal.style.height = 'auto';
-            
-            // Duração aleatória da animação
-            const duration = Math.random() * 15 + 10;
-            petal.style.animationDuration = duration + 's';
-            
-            // Atraso aleatório
-            const delay = Math.random() * 5;
-            petal.style.animationDelay = delay + 's';
-            
-            // Tamanho e velocidade de rotação aleatórios
-            const rotationSpeed = Math.random() * 360;
-            petal.style.transform = `rotate(${rotationSpeed}deg)`;
-            
-            container.appendChild(petal);
-            
-            // Remover a flor depois que a animação terminar
-            setTimeout(() => {
-                petal.remove();
-            }, (duration + delay) * 1000);
-        }
-        
-        // Criar flores em intervalos regulares
-        setInterval(createPetal, 300);
-        
-        // Criar algumas flores imediatamente ao carregar a página
-        for (let i = 0; i < 30; i++) {
-            setTimeout(createPetal, Math.random() * 2000);
-        }
+// Carrossel de imagens
+let currentSlide = 0;
+const slides = document.querySelector('.slides');
+const slideCount = document.querySelectorAll('.slide').length;
+
+function showSlide(n) {
+    currentSlide = (n + slideCount) % slideCount;
+    slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+}
+
+document.querySelector('.next').addEventListener('click', () => {
+    showSlide(currentSlide + 1);
+});
+
+document.querySelector('.prev').addEventListener('click', () => {
+    showSlide(currentSlide - 1);
+});
+
+// Alternar slides automaticamente a cada 5 segundos
+setInterval(() => {
+    showSlide(currentSlide + 1);
+}, 5000);
+
+// Função para criar pétalas de flores caindo
+function createPetal() {
+    const container = document.getElementById('falling-flowers');
+    const petal = document.createElement('img');
+    petal.classList.add('petal');
+    
+    // Escolher aleatoriamente entre as imagens de flores
+    const randomImage = flowerImages[Math.floor(Math.random() * flowerImages.length)];
+    petal.src = randomImage;
+    
+    // Posição aleatória no eixo X
+    const startPositionX = Math.random() * 100;
+    petal.style.left = startPositionX + 'vw';
+    
+    // Tamanho aleatório
+    const size = Math.random() * 25 + 15;
+    petal.style.width = size + 'px';
+    petal.style.height = 'auto';
+    
+    // Duração aleatória da animação
+    const duration = Math.random() * 15 + 10;
+    petal.style.animationDuration = duration + 's';
+    
+    // Atraso aleatório
+    const delay = Math.random() * 5;
+    petal.style.animationDelay = delay + 's';
+    
+    // Tamanho e velocidade de rotação aleatórios
+    const rotationSpeed = Math.random() * 360;
+    petal.style.transform = `rotate(${rotationSpeed}deg)`;
+    
+    container.appendChild(petal);
+    
+    // Remover a flor depois que a animação terminar
+    setTimeout(() => {
+        petal.remove();
+    }, (duration + delay) * 1000);
+}
+
+// Criar flores por 10 segundos
+const petalCreationInterval = setInterval(createPetal, 300); // Cria pétalas a cada 300ms
+
+// Parar de criar flores após 10 segundos
+setTimeout(() => {
+    clearInterval(petalCreationInterval); // Interrompe a criação de novas pétalas
+}, 15000); // 15 segundos
+
+// Criar algumas flores imediatamente ao carregar a página
+for (let i = 0; i < 30; i++) {
+    setTimeout(createPetal, Math.random() * 2000); // Cria pétalas com um pequeno atraso aleatório
+}
     </script>
 </body>
 </html>
