@@ -269,7 +269,7 @@
             showSlide(currentSlide + 1);
         }, 5000);
 
-       // Função melhorada para criar pétalas de flores caindo
+        // Função melhorada para criar pétalas de flores caindo
         function createPetal() {
             const container = document.getElementById('falling-flowers');
             const petal = document.createElement('img');
@@ -308,10 +308,12 @@
             }, (duration + delay) * 1000);
         }
         
-        // Criar várias pétalas de uma só vez ao carregar a página
-        const numberOfPetals = 30; // Número de pétalas que você deseja criar
-        for (let i = 0; i < numberOfPetals; i++) {
-            setTimeout(createPetal, Math.random() * 2000); // Cria pétalas com um pequeno atraso aleatório
+        // Criar flores em intervalos regulares
+        setInterval(createPetal, 300);
+        
+        // Criar algumas flores imediatamente ao carregar a página
+        for (let i = 0; i < 30; i++) {
+            setTimeout(createPetal, Math.random() * 2000);
         }
     </script>
 </body>
